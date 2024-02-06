@@ -1,25 +1,26 @@
 ﻿using DropzoneBox.Mvc.Application.Config;
 using FluentFTP;
 using System.Net;
+using FtpConfig = DropzoneBox.Mvc.Application.Config.FtpConfig;
 
 namespace DropzoneBox.Mvc.Infrastructure
 {
-    public class SftpService
+    public class FtpService
     {
         private readonly IConfiguration _configuration;
-        private SftpConfig _sftpConfig;
-        public SftpService(IConfiguration configuration)
+        private Application.Config.FtpConfig _ftpConfig;
+        public FtpService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _sftpConfig = _configuration.GetSection("Sftp").Get<SftpConfig>();
+            _ftpConfig = _configuration.GetSection("Ftp").Get<FtpConfig>();
         }
 
         public async Task<bool> Upload(Stream stream, string filePath)
         {
             using (var client = new FtpClient(
-                _sftpConfig.ServerName,
-                new NetworkCredential(_sftpConfig.UserName, _sftpConfig.Password),
-                port: _sftpConfig.Port
+                _ftpConfig.ServerName,
+                new NetworkCredential(_ftpConfig.UserName, _ftpConfig.Password),
+                port: _ftpConfig.Port
                ))
             {
                 client.Connect();
@@ -32,9 +33,9 @@ namespace DropzoneBox.Mvc.Infrastructure
         {
             var files = new List<string>();
             using (var client = new FtpClient(
-                _sftpConfig.ServerName,
-                new NetworkCredential(_sftpConfig.UserName, _sftpConfig.Password),
-                port: _sftpConfig.Port
+                _ftpConfig.ServerName,
+                new NetworkCredential(_ftpConfig.UserName, _ftpConfig.Password),
+                port: _ftpConfig.Port
                ))
             {
                 foreach (FtpListItem item in client.GetListing())

@@ -8,12 +8,12 @@ namespace DropzoneBox.Mvc.Controllers
     public class UploadController : Controller
     {
         private readonly IConfiguration _configuration;
-        private readonly SftpService _sftpService;
+        private readonly FtpService _ftpService;
 
-        public UploadController(IConfiguration configuration, SftpService sftpService)
+        public UploadController(IConfiguration configuration, FtpService ftpService)
         {
             _configuration = configuration;
-            _sftpService = sftpService;
+            _ftpService = ftpService;
         }
 
         [HttpPost]
@@ -30,7 +30,7 @@ namespace DropzoneBox.Mvc.Controllers
                 }
 
                 var filePath = Path.Combine(_configuration["Uploads:StoragePath"],file.FileName);
-                await _sftpService.Upload(file.OpenReadStream(), filePath);
+                await _ftpService.Upload(file.OpenReadStream(), filePath);
 
                 return new JsonResult("uploaded");
             }

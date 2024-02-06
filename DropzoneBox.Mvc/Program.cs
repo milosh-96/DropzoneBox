@@ -10,7 +10,7 @@ namespace DropzoneBox.Mvc
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<SftpService>();
+            builder.Services.AddScoped<FtpService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

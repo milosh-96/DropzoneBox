@@ -5,16 +5,16 @@ namespace DropzoneBox.Mvc.Controllers
 {
     public class DirectoryController : Controller
     {
-        private readonly SftpService _sftpService;
+        private readonly FtpService _ftpService;
 
-        public DirectoryController(SftpService sftpService)
+        public DirectoryController(FtpService ftpService)
         {
-            _sftpService = sftpService;
+            _ftpService = ftpService;
         }
 
         public IActionResult List()
         {
-            return new JsonResult(_sftpService.List());
+            return new JsonResult(_ftpService.List());
         }
     }
 }

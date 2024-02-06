@@ -1,6 +1,6 @@
 ﻿namespace DropzoneBox.Mvc.Application.Config
 {
-    public class SftpConfig
+    public class FtpConfig
     {
         public string ServerName { get; set; }
         public int Port { get; set; }
