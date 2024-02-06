@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <form action="/upload/imageupload"
+          class="dropzone"
+          id="my-awesome-dropzone">
+        
+      </form>
+</div>
+
+@section Scripts {
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Note that the name "myDropzone" is the camelized
+        // id of the form.
+            Dropzone.options.myAwesomeDropzone = { // camelized version of the `id`
+                paramName: "file", // The name that will be used to transfer the file
+                maxFilesize: 2, // MB
+                accept: function (file, done) {
+                    if (file.name == "justinbieber.jpg") {
+                        done("Naha, you don't.");
+                    }
+                    else { done(); }
+                }
+            };
+    });
+</script>
+}
